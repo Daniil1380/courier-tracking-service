@@ -21,7 +21,7 @@ public interface EgtsConnector {
      * @return Список информации о трекинге курьеров, отправленных на сервер и успешно принятых
      */
     List<OperationResult> sendData(Socket socket,
-                                       List<CourierTrackingInfo> courierTrackingInfos,
-                                       int dispatcherId,
-                                       Instant now);
+                                   List<CourierTrackingInfo> courierTrackingInfos,
+                                   int dispatcherId,
+                                   Instant now);
 }

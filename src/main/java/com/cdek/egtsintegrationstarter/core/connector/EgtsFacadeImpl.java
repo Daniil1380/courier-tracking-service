@@ -9,7 +9,6 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 import java.net.Socket;
 import java.time.Instant;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -30,8 +29,7 @@ public class EgtsFacadeImpl implements EgtsFacade {
         } catch (Exception e) {
             log.error("ERROR WHILE SENDING DATA", e);
             return List.of();
-        }
-        finally {
+        } finally {
             if (socket != null) {
                 tcpPool.returnObject(socket);
             }
