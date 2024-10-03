@@ -10,6 +10,8 @@ import java.nio.ByteOrder;
 import java.time.Instant;
 
 import static com.cdek.egtsintegrationstarter.util.BooleanUtil.getStringFromBool;
+import static com.cdek.egtsintegrationstarter.util.ConstantValues.TIMESTAMP_IN_2010;
+import static com.cdek.egtsintegrationstarter.util.ConstantValues.ZERO_BYTE;
 
 /**
  * Класс, представляющий данные о позиции курьера
@@ -98,49 +100,39 @@ public class PositionData implements BinaryData {
     private byte source;
 
     /**
-     * Временная метка начала отсчёта (1 января 2010 года)
-     */
-    private final static Long TIMESTAMP_IN_2010 = 1262304000L;
-
-    /**
      * Множитель скорости
      */
-    private final static int SPEED_MULTIPLIER = 10;
-
-    /**
-     * Байт, равный нулю
-     */
-    private final static byte ZERO_BYTE = 0;
+    private static final int SPEED_MULTIPLIER = 10;
 
     /**
      * Максимальное значение байта
      */
-    private final static int MAX_BYTE = 0xFF;
+    private static final int MAX_BYTE = 0xFF;
 
     /**
      * Максимальное значение широты
      */
-    private final static int MAX_LATITUDE = 90;
+    private static final int MAX_LATITUDE = 90;
 
     /**
      * Максимальное значение долготы
      */
-    private final static int MAX_LONGITUDE = 180;
+    private static final int MAX_LONGITUDE = 180;
 
     /**
      * Максимальное значение беззнакового целого числа
      */
-    private final static int MAX_VALUE_UNSIGNED_INT = 0xFFFFFFFF;
+    private static final int MAX_VALUE_UNSIGNED_INT = 0xFFFFFFFF;
 
     /**
      * Высший бит в байте
      */
-    private final static int HIGH_BIT_IN_BYTE = 0x8000;
+    private static final int HIGH_BIT_IN_BYTE = 0x8000;
 
     /**
      * Размер данных в байтах
      */
-    private final static int SIZE_OF_DATA = 21;
+    private static final int SIZE_OF_DATA = 21;
 
     public PositionData(Instant navigationTime,
                         int latitude,

@@ -28,7 +28,7 @@ public class SubRecordResponse implements DecodableBinaryData {
     /**
      * Размер ответа
      */
-    private final static int SIZE_OF_DATA = 3;
+    private static final int SIZE_OF_DATA = 3;
 
     public SubRecordResponse() {
     }

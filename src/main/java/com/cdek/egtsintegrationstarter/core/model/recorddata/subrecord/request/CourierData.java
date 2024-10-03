@@ -25,14 +25,9 @@ public class CourierData implements BinaryData {
     private int value;
 
     /**
-     * Байт, равный нулю
-     */
-    private final static byte ZERO_BYTE = 0;
-
-    /**
      * Размер данных в байтах
      */
-    private final static byte SIZE_OF_DATA = 4;
+    private static final byte SIZE_OF_DATA = 4;
 
     public CourierData(CourierDataType courierDataType, int value) {
         this.courierDataType = courierDataType;

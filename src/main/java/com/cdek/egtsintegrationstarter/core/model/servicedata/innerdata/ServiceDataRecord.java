@@ -13,6 +13,7 @@ import java.nio.ByteOrder;
 import java.time.Instant;
 
 import static com.cdek.egtsintegrationstarter.util.BooleanUtil.getStringFromBool;
+import static com.cdek.egtsintegrationstarter.util.ConstantValues.TIMESTAMP_IN_2010;
 
 /**
  * Сервис - единица передачи данных в EGTS
@@ -97,9 +98,15 @@ public class ServiceDataRecord implements BinaryData {
      */
     private RecordDataSet recordDataSet;
 
-    private final static Long TIMESTAMP_IN_2010 = 1262304000L;
-    private final static int SIZE_OF_DATA = 7;
-    private final static int SIZE_OF_ADDITIONAL_DATA = 4;
+    /**
+     * Размер основных данных
+     */
+    private static final int SIZE_OF_DATA = 7;
+
+    /**
+     * Размер доп. данных, если они есть
+     */
+    private static final int SIZE_OF_ADDITIONAL_DATA = 4;
 
 
     public ServiceDataRecord(int recordNumber, ServiceType recipientServiceType, RecordDataSet recordDataSet, Instant now) {

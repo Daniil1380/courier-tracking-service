@@ -9,6 +9,7 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 import java.net.Socket;
 import java.time.Instant;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -24,14 +25,17 @@ public class EgtsFacadeImpl implements EgtsFacade {
 
         try {
             socket = tcpPool.borrowObject(egtsConfigProperties.getMaxWaitTime());
-            log.info(socket.toString());
+            log.info("BORROWING SOCKET. ACTIVE: {}, IDLE: {}", tcpPool.getNumActive(), tcpPool.getNumIdle());
             return egtsConnector.sendData(socket, courierTrackingInfos, dispatcherId, now);
         } catch (Exception e) {
-            log.error("ERROR WHILE SENDING", e);
+            log.error("ERROR WHILE SENDING DATA", e);
             return List.of();
         }
         finally {
-            tcpPool.returnObject(socket);
+            if (socket != null) {
+                tcpPool.returnObject(socket);
+            }
+            log.info("RETURNING SOCKET. ACTIVE: {}, IDLE: {}", tcpPool.getNumActive(), tcpPool.getNumIdle());
         }
     }
 }

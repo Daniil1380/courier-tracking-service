@@ -17,6 +17,9 @@ import org.apache.commons.pool2.PoolUtils;
 import org.apache.commons.pool2.PooledObjectFactory;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +30,7 @@ import java.net.Socket;
  * АвтоКонфигурация библиотеки работы с EGTS
  */
 @Configuration
+@ConditionalOnClass(EgtsFacade.class)
 public class EgtsAutoconfiguration {
 
     /**
@@ -34,6 +38,7 @@ public class EgtsAutoconfiguration {
      */
     @Bean
     @ConfigurationProperties("egts")
+    @ConditionalOnProperty(value = {"host", "port"})
     public EgtsConfigProperties egtsProperties() {
         return new EgtsConfigProperties();
     }
@@ -42,6 +47,7 @@ public class EgtsAutoconfiguration {
      * Приемник пакетов
      */
     @Bean
+    @ConditionalOnMissingBean(PackageReceiver.class)
     public PackageReceiver packageReceiver() {
         return new PackageReceiverImpl();
     }
@@ -50,6 +56,7 @@ public class EgtsAutoconfiguration {
      * Отправитель пакетов
      */
     @Bean
+    @ConditionalOnMissingBean(PackageSender.class)
     public PackageSender packageSender() {
         return new PackageSenderImpl();
     }
@@ -58,6 +65,7 @@ public class EgtsAutoconfiguration {
      * Сервис позиционирования курьера
      */
     @Bean
+    @ConditionalOnMissingBean(PositionService.class)
     public PositionService positionService(PackageReceiver packageReceiver,
                                            PackageSender packageSender,
                                            EgtsConfigProperties egtsConfigProperties) {
@@ -68,6 +76,7 @@ public class EgtsAutoconfiguration {
      * Авторизационный сервис
      */
     @Bean
+    @ConditionalOnMissingBean(AuthService.class)
     public AuthService authService(PackageReceiver packageReceiver,
                                    PackageSender packageSender) {
         return new AuthServiceImpl(packageReceiver, packageSender);
@@ -77,6 +86,7 @@ public class EgtsAutoconfiguration {
      * Коннектор EGTS
      */
     @Bean
+    @ConditionalOnMissingBean(EgtsConnector.class)
     public EgtsConnector egtsConnector(AuthService authService,
                                        PositionService positionService,
                                        EgtsConfigProperties egtsConfigProperties) {
@@ -87,6 +97,7 @@ public class EgtsAutoconfiguration {
      * Фабрика сокетов
      */
     @Bean
+    @ConditionalOnMissingBean(PooledObjectFactory.class)
     public PooledObjectFactory<Socket> socketFactory(EgtsConfigProperties egtsConfigProperties) {
         return PoolUtils.synchronizedPooledFactory(new EgtsSocketFactory(egtsConfigProperties));
 
@@ -96,6 +107,7 @@ public class EgtsAutoconfiguration {
      * Пул сокетов
      */
     @Bean
+    @ConditionalOnMissingBean(GenericObjectPool.class)
     public GenericObjectPool<Socket> tcpPool(EgtsConfigProperties egtsConfigProperties,
                                              PooledObjectFactory<Socket> socketPooledObjectFactory) {
         GenericObjectPoolConfig<Socket> poolConfig = new GenericObjectPoolConfig<>();
@@ -111,6 +123,7 @@ public class EgtsAutoconfiguration {
      * Фасад для работы с библиотекой
      */
     @Bean
+    @ConditionalOnMissingBean(EgtsFacade.class)
     public EgtsFacade egtsFacade(EgtsConfigProperties egtsConfigProperties,
                                  EgtsConnector egtsConnector,
                                  GenericObjectPool<Socket> pool) {

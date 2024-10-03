@@ -18,6 +18,7 @@ import java.nio.ByteOrder;
 
 import static com.cdek.egtsintegrationstarter.core.model.packagedata.PackageType.EGTS_PT_RESPONSE;
 import static com.cdek.egtsintegrationstarter.util.BooleanUtil.getStringFromBool;
+import static com.cdek.egtsintegrationstarter.util.ConstantValues.ZERO_BYTE;
 import static com.cdek.egtsintegrationstarter.util.CrcUtil.calculateCrc16;
 import static com.cdek.egtsintegrationstarter.util.CrcUtil.calculateCrc8;
 
@@ -126,25 +127,20 @@ public class PackageData implements DecodableBinaryData {
     private static final byte PROTOCOL_VERSION = 1;
 
     /**
-     * Значение, обозначающее отсутствие (ноль)
-     */
-    private static final byte NONE = 0;
-
-    /**
      * Длина заголовка по умолчанию
      */
     private static final byte HEADER_LENGTH = 11;
 
     public PackageData(int packageIdentifier, PackageType packageType, ServiceFrameData servicesFrameData) {
         this.protocolVersion = PROTOCOL_VERSION;
-        this.securityKeyId = NONE;
+        this.securityKeyId = ZERO_BYTE;
         this.prefix = false;
         this.route = false;
         this.encryptionAlg = false;
         this.compression = false;
         this.priority = false;
         this.headerLength = HEADER_LENGTH;
-        this.headerEncoding = NONE;
+        this.headerEncoding = ZERO_BYTE;
         this.packageIdentifier = packageIdentifier;
         this.packageType = packageType;
         this.servicesFrameData = servicesFrameData;

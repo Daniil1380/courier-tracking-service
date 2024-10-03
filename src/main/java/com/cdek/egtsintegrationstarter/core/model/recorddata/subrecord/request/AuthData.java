@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import static com.cdek.egtsintegrationstarter.util.ConstantValues.ZERO_BYTE;
+
 /**
  * Класс, представляющий данные аутентификации
  */
@@ -24,15 +26,11 @@ public class AuthData implements BinaryData {
      */
     private int dispatcherId;
 
-    /**
-     * Байт, равный нулю
-     */
-    private final static byte ZERO_BYTE = 0;
 
     /**
      * Размер данных в байтах
      */
-    private final static byte SIZE_OF_DATA = 5;
+    private static final byte SIZE_OF_DATA = 5;
 
     public AuthData(int dispatcherId) {
         this.dispatcherType = ZERO_BYTE;

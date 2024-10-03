@@ -39,6 +39,6 @@ public enum PackageType {
                 return value;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Unknown package type: " + id);
     }
 }

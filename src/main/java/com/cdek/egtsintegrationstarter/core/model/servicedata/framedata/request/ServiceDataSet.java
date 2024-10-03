@@ -19,6 +19,8 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.cdek.egtsintegrationstarter.util.ConstantValues.TIMESTAMP_IN_2010;
+
 /**
  * Класс, представляющий набор сервисов
  */
@@ -31,10 +33,7 @@ public class ServiceDataSet implements ServiceFrameData {
      * Список сервисов
      */
     private List<ServiceDataRecord> serviceDataRecords;
-    /**
-     * Дополнительные секунды, чтобы сбалансировать Instant (01.01.1970) и формат EGTS (01.01.2010)
-     */
-    private final static Long TIMESTAMP_IN_2010 = 1262304000L;
+
 
     @Override
     public void decode(byte[] content) {

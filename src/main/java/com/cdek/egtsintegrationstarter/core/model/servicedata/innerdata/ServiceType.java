@@ -39,6 +39,6 @@ public enum ServiceType {
                 return value;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Invalid ServiceType: " + id);
     }
 }

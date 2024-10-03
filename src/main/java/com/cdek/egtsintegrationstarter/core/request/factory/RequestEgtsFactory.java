@@ -20,15 +20,13 @@ import com.cdek.egtsintegrationstarter.core.model.servicedata.innerdata.ServiceT
 import java.time.Instant;
 import java.util.List;
 
+import static com.cdek.egtsintegrationstarter.util.ConstantValues.ZERO_BYTE;
+
 /**
  * Фабрика для создания различных типов запросов EGTS
  */
 public class RequestEgtsFactory {
 
-    /**
-     * Ноль для отправки в виде байта
-     */
-    private static final byte ZERO_CODE = 0;
 
     /**
      * Единица для отправки в виде байта
@@ -38,7 +36,7 @@ public class RequestEgtsFactory {
     /**
      * Форматер для строки, в которую подставляются значения курьера для отправки
      */
-    private final static String FORMAT_STRING = "kisartid=%d;vplate=%s;bagplates=%s;orders=%s";
+    private static final String FORMAT_STRING = "kisartid=%d;vplate=%s;bagplates=%s;orders=%s";
 
     /**
      * Создает пакет данных для аутентификационного запроса
@@ -52,10 +50,10 @@ public class RequestEgtsFactory {
         RecordData recordData = new RecordData(authData, RecordType.EGTS_SR_DISPATCHER_IDENTITY);
         RecordDataSet recordDataSet = new RecordDataSet(List.of(recordData));
 
-        ServiceDataRecord serviceDataRecord = new ServiceDataRecord(ZERO_CODE, ServiceType.EGTS_AUTH_SERVICE, recordDataSet, now);
+        ServiceDataRecord serviceDataRecord = new ServiceDataRecord(ZERO_BYTE, ServiceType.EGTS_AUTH_SERVICE, recordDataSet, now);
         ServiceDataSet serviceDataSet = new ServiceDataSet(List.of(serviceDataRecord));
 
-        return new PackageData(ZERO_CODE, PackageType.EGTS_PT_APPDATA, serviceDataSet);
+        return new PackageData(ZERO_BYTE, PackageType.EGTS_PT_APPDATA, serviceDataSet);
     }
 
     /**
@@ -67,12 +65,12 @@ public class RequestEgtsFactory {
      * @return Пакет данных для подтверждения отправки запроса
      */
     public static PackageData createSubmitRequest(int submittedPackageId, int submittedSubRecordId, Instant now) {
-        SubRecordResponse subRecordResponse = new SubRecordResponse((short) submittedSubRecordId, ZERO_CODE);
+        SubRecordResponse subRecordResponse = new SubRecordResponse((short) submittedSubRecordId, ZERO_BYTE);
         RecordData recordData = new RecordData(subRecordResponse, RecordType.EGTS_SR_RECORD_RESPONSE);
         RecordDataSet recordDataSet = new RecordDataSet(List.of(recordData));
-        ServiceDataRecord serviceDataRecord = new ServiceDataRecord(ZERO_CODE, ServiceType.EGTS_AUTH_SERVICE, recordDataSet, now);
+        ServiceDataRecord serviceDataRecord = new ServiceDataRecord(ZERO_BYTE, ServiceType.EGTS_AUTH_SERVICE, recordDataSet, now);
         ServiceDataSet serviceDataSet = new ServiceDataSet(List.of(serviceDataRecord));
-        PtResponse ptResponse = new PtResponse(submittedPackageId, ZERO_CODE, serviceDataSet);
+        PtResponse ptResponse = new PtResponse(submittedPackageId, ZERO_BYTE, serviceDataSet);
         return new PackageData(ONE_CODE, PackageType.EGTS_PT_RESPONSE, ptResponse);
     }
 

@@ -64,6 +64,6 @@ public enum RecordType {
                 return value;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Unknown record type: " + id);
     }
 }

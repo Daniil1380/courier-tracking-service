@@ -9,6 +9,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 
+import static com.cdek.egtsintegrationstarter.util.ConstantValues.ZERO_BYTE;
+
 /**
  * Класс, представляющий расширенные данные курьера
  */
@@ -31,14 +33,9 @@ public class ExtendedCourierData implements BinaryData {
     private String valueString;
 
     /**
-     * Байт, равный нулю
-     */
-    private final static byte ZERO_BYTE = 0;
-
-    /**
      * Размер данных в байтах (без учета строкового значения)
      */
-    private final static byte SIZE_OF_DATA = 4;
+    private static final byte SIZE_OF_DATA = 4;
 
     public ExtendedCourierData(int vendorIdentifier,
                                String valueString) {

@@ -8,6 +8,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+//TODO Refresh
 public class EgtsConfigProperties {
 
     /**

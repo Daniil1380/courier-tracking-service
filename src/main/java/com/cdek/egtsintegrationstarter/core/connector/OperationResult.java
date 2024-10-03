@@ -5,16 +5,31 @@ import com.cdek.egtsintegrationstarter.core.model.CourierTrackingInfo;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * Результат работы EGTS
+ */
 @Data
 @Builder
 public class OperationResult {
 
-    CourierTrackingInfo initialData;
+    /**
+     * Изначальные данные
+     */
+    private CourierTrackingInfo initialData;
 
-    BinaryData sentData;
+    /**
+     * Что послали
+     */
+    private BinaryData sentData;
 
-    BinaryData receivedData;
+    /**
+     * Что получили
+     */
+    private BinaryData receivedData;
 
-    boolean isSuccessful;
+    /**
+     * Успешно ли
+     */
+    private boolean isSuccessful;
 
 }

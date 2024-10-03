@@ -10,7 +10,7 @@ import java.io.InputStream;
 @Slf4j
 public class PackageReceiverImpl implements PackageReceiver {
 
-    private final static int BUFFER_SIZE = 256;
+    private static final int BUFFER_SIZE = 256;
 
     @Override
     public PackageData receivePackage(InputStream inputStream) throws EgtsBadAnswerException {
