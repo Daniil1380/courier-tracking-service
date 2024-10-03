@@ -15,7 +15,7 @@
 # "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
-# under the License.
+# under the License
 # ----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
@@ -32,7 +32,7 @@
 set -euf
 [ "${MVNW_VERBOSE-}" != debug ] || set -x
 
-# OS specific support.
+# OS specific support
 native_path() { printf %s\\n "$1"; }
 case "$(uname)" in
 CYGWIN* | MINGW*)
@@ -99,9 +99,9 @@ die() {
 
 trim() {
   # MWRAPPER-139:
-  #   Trims trailing and leading whitespace, carriage returns, tabs, and linefeeds.
+  #   Trims trailing and leading whitespace, carriage returns, tabs, and linefeeds
   #   Needed for removing poorly interpreted newline sequences when running in more
-  #   exotic environments such as mingw bash on Windows.
+  #   exotic environments such as mingw bash on Windows
   printf "%s" "${1}" | tr -d '[:space:]'
 }
 

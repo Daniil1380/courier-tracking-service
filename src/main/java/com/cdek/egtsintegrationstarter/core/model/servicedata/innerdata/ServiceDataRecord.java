@@ -23,22 +23,22 @@ import static com.cdek.egtsintegrationstarter.util.BooleanUtil.getStringFromBool
 public class ServiceDataRecord implements BinaryData {
 
     /**
-     * Длина записи.
+     * Длина записи
      */
     private int recordLength;
 
     /**
-     * Номер записи.
+     * Номер записи
      */
     private int recordNumber;
 
     /**
-     * Флаг, указывающий, находится ли получатель сервиса на устройстве-отправителе.
+     * Флаг, указывающий, находится ли получатель сервиса на устройстве-отправителе
      */
     private boolean sourceServiceOnDevice;
 
     /**
-     * Флаг, указывающий, находится ли получатель сервиса на устройстве-получателе.
+     * Флаг, указывающий, находится ли получатель сервиса на устройстве-получателе
      */
     private boolean recipientServiceOnDevice;
 
@@ -48,32 +48,32 @@ public class ServiceDataRecord implements BinaryData {
     private boolean group;
 
     /**
-     * Флаг, указывающий приоритет обработки записи.
+     * Флаг, указывающий приоритет обработки записи
      */
     private boolean recordProcessingPriority;
 
     /**
-     * Флаг, указывающий, существует ли поле времени.
+     * Флаг, указывающий, существует ли поле времени
      */
     private boolean timeFieldExists;
 
     /**
-     * Флаг, указывающий, существует ли поле идентификатора события.
+     * Флаг, указывающий, существует ли поле идентификатора события
      */
     private boolean eventIdFieldExists;
 
     /**
-     * Флаг, указывающий, существует ли поле идентификатора объекта.
+     * Флаг, указывающий, существует ли поле идентификатора объекта
      */
     private boolean objectIdFieldExists;
 
     /**
-     * Идентификатор объекта.
+     * Идентификатор объекта
      */
     private int objectIdentifier;
 
     /**
-     * Идентификатор события.
+     * Идентификатор события
      */
     private int eventIdentifier;
 
@@ -83,17 +83,17 @@ public class ServiceDataRecord implements BinaryData {
     private Instant time;
 
     /**
-     * Тип сервиса на устройстве отправителя.
+     * Тип сервиса на устройстве отправителя
      */
     private ServiceType sourceServiceType;
 
     /**
-     * Тип сервиса на устройстве получателя.
+     * Тип сервиса на устройстве получателя
      */
     private ServiceType recipientServiceType;
 
     /**
-     * Набор подзаписей сервиса.
+     * Набор подзаписей сервиса
      */
     private RecordDataSet recordDataSet;
 
@@ -115,11 +115,6 @@ public class ServiceDataRecord implements BinaryData {
         this.sourceServiceType = recipientServiceType;
         this.recipientServiceType = recipientServiceType;
         this.recordDataSet = recordDataSet;
-    }
-
-    @Override
-    public BinaryData decode(byte[] content) {
-        return null;
     }
 
     @Override
@@ -162,9 +157,9 @@ public class ServiceDataRecord implements BinaryData {
     }
 
     /**
-     * Вычисляет флаги для записи.
+     * Вычисляет флаги для записи
      *
-     * @return Байт, представляющий флаги.
+     * @return Байт, представляющий флаги
      */
     private byte calculateFlags() {
         var flagsBits = getStringFromBool(sourceServiceOnDevice)

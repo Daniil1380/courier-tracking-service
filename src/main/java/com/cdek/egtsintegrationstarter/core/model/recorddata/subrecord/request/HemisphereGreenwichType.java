@@ -3,23 +3,23 @@ package com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.request;
 import lombok.Getter;
 
 /**
- * Перечисление, представляющее типы полушарий по Гринвичу.
+ * Перечисление, представляющее типы полушарий по Гринвичу
  */
 @Getter
 public enum HemisphereGreenwichType {
 
     /**
-     * Западное полушарие.
+     * Западное полушарие
      */
     WEST("1"),
 
     /**
-     * Восточное полушарие.
+     * Восточное полушарие
      */
     EAST("0");
 
     /**
-     * Значение типа полушария.
+     * Значение типа полушария
      */
     private final String value;
 

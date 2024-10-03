@@ -1,7 +1,6 @@
 package com.cdek.egtsintegrationstarter.core.model.recorddata;
 
 import com.cdek.egtsintegrationstarter.core.model.BinaryData;
-import com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.SubRecordData;
 import lombok.Data;
 
 import java.io.ByteArrayOutputStream;
@@ -10,43 +9,36 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 /**
- * Класс, представляющий данные подзаписи.
+ * Класс, представляющий данные подзаписи
  */
 @Data
 public class RecordData implements BinaryData {
 
     /**
-     * Тип подзаписи.
+     * Тип подзаписи
      */
     private RecordType subrecordType;
 
     /**
-     * Длина подзаписи.
+     * Длина подзаписи
      */
     private short subrecordLength;
 
     /**
-     * Данные подзаписи.
+     * Данные подзаписи
      */
-    private SubRecordData subrecordData;
+    private BinaryData subrecordData;
 
     /**
-     * Размер заголовка подзаписи.
+     * Размер заголовка подзаписи
      */
     private static final int SIZE_OF_DATA = 3;
 
 
-    public RecordData(SubRecordData subrecordData, RecordType subrecordType) {
+    public RecordData(BinaryData subrecordData, RecordType subrecordType) {
         this.subrecordData = subrecordData;
         this.subrecordType = subrecordType;
         this.subrecordLength = calculateSubRecordLength();
-    }
-
-
-    @Override
-    public BinaryData decode(byte[] content) {
-        // Реализация в RecordDataSet
-        return null;
     }
 
     @Override

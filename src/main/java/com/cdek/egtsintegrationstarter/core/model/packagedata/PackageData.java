@@ -1,6 +1,6 @@
 package com.cdek.egtsintegrationstarter.core.model.packagedata;
 
-import com.cdek.egtsintegrationstarter.core.model.BinaryData;
+import com.cdek.egtsintegrationstarter.core.model.DecodableBinaryData;
 import com.cdek.egtsintegrationstarter.core.model.servicedata.framedata.ServiceFrameData;
 import com.cdek.egtsintegrationstarter.core.model.servicedata.framedata.request.ServiceDataSet;
 import com.cdek.egtsintegrationstarter.core.model.servicedata.framedata.response.PtResponse;
@@ -22,116 +22,116 @@ import static com.cdek.egtsintegrationstarter.util.CrcUtil.calculateCrc16;
 import static com.cdek.egtsintegrationstarter.util.CrcUtil.calculateCrc8;
 
 /**
- * Класс, представляющий данные пакета.
+ * Класс, представляющий данные пакета
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PackageData implements BinaryData {
+public class PackageData implements DecodableBinaryData {
 
     /**
-     * Версия протокола.
+     * Версия протокола
      */
     private int protocolVersion;
 
     /**
-     * Идентификатор ключа безопасности.
+     * Идентификатор ключа безопасности
      */
     private int securityKeyId;
 
     /**
-     * Флаг, указывающий, есть ли префикс.
+     * Флаг, указывающий, есть ли префикс
      */
     private boolean prefix;
 
     /**
-     * Флаг, указывающий, есть ли маршрут.
+     * Флаг, указывающий, есть ли маршрут
      */
     private boolean route;
 
     /**
-     * Флаг, указывающий, используется ли алгоритм шифрования.
+     * Флаг, указывающий, используется ли алгоритм шифрования
      */
     private boolean encryptionAlg;
 
     /**
-     * Флаг, указывающий, используется ли сжатие.
+     * Флаг, указывающий, используется ли сжатие
      */
     private boolean compression;
 
     /**
-     * Флаг, указывающий, есть ли приоритет.
+     * Флаг, указывающий, есть ли приоритет
      */
     private boolean priority;
 
     /**
-     * Длина заголовка.
+     * Длина заголовка
      */
     private int headerLength;
 
     /**
-     * Кодировка заголовка.
+     * Кодировка заголовка
      */
     private int headerEncoding;
 
     /**
-     * Длина данных "рамка".
+     * Длина данных "рамка"
      */
     private short frameDataLength;
 
     /**
-     * Идентификатор пакета.
+     * Идентификатор пакета
      */
     private int packageIdentifier;
 
     /**
-     * Тип пакета.
+     * Тип пакета
      */
     private PackageType packageType;
 
     /**
-     * Адрес отправителя.
+     * Адрес отправителя
      */
     private int peerAddress;
 
     /**
-     * Адрес получателя.
+     * Адрес получателя
      */
     private int recipientAddress;
 
     /**
-     * Время жизни пакета.
+     * Время жизни пакета
      */
     private int timeToLive;
 
     /**
-     * Контрольная сумма заголовка.
+     * Контрольная сумма заголовка
      */
     private int headerCheckSum;
 
     /**
-     * Данные "рамки" сервисов.
+     * Данные "рамки" сервисов
      */
     private ServiceFrameData servicesFrameData;
 
     /**
-     * Контрольная сумма данных "рамки" сервисов.
+     * Контрольная сумма данных "рамки" сервисов
      */
     private int servicesFrameDataCheckSum;
 
     /**
-     * Версия протокола по умолчанию.
+     * Версия протокола по умолчанию
      */
     private static final byte PROTOCOL_VERSION = 1;
 
     /**
-     * Значение, обозначающее отсутствие (ноль).
+     * Значение, обозначающее отсутствие (ноль)
      */
     private static final byte NONE = 0;
 
     /**
-     * Длина заголовка по умолчанию.
+     * Длина заголовка по умолчанию
      */
     private static final byte HEADER_LENGTH = 11;
 
@@ -151,7 +151,7 @@ public class PackageData implements BinaryData {
     }
 
     @Override
-    public BinaryData decode(byte[] content) {
+    public void decode(byte[] content) {
         var inputStream = new ByteArrayInputStream(content);
         var in = new BufferedInputStream(inputStream);
         try {
@@ -183,13 +183,12 @@ public class PackageData implements BinaryData {
             throw new RuntimeException(e);
         }
 
-        return this;
     }
 
     /**
-     * Декодирует флаги из байта.
+     * Декодирует флаги из байта
      *
-     * @param flag Байт, содержащий флаги.
+     * @param flag Байт, содержащий флаги
      */
     private void decodeFlags(int flag) {
         prefix = (flag & 0b11000000) == 0b11000000;
@@ -200,9 +199,9 @@ public class PackageData implements BinaryData {
     }
 
     /**
-     * Декодирует данные "рамки" сервиса.
+     * Декодирует данные "рамки" сервиса
      *
-     * @param dataFrameBytes Массив байтов, содержащий данные кадра сервиса.
+     * @param dataFrameBytes Массив байтов, содержащий данные кадра сервиса
      */
     private void decodeService(byte[] dataFrameBytes) {
         switch (packageType) {
@@ -244,9 +243,9 @@ public class PackageData implements BinaryData {
     }
 
     /**
-     * Вычисляет флаги для данных пакета.
+     * Вычисляет флаги для данных пакета
      *
-     * @return Байт, представляющий флаги.
+     * @return Байт, представляющий флаги
      */
     private byte calculateFlags() {
         var flagsBits = getStringFromBool(prefix)
@@ -260,7 +259,7 @@ public class PackageData implements BinaryData {
 
     @Override
     public int length() {
-        return 0;
+        return headerLength + frameDataLength;
     }
 
     /**

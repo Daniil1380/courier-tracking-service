@@ -16,6 +16,7 @@ import java.net.Socket;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,12 +27,12 @@ public class EgtsConnectorImpl implements EgtsConnector {
     private final EgtsConfigProperties egtsConfigProperties;
 
     @Override
-    public List<CourierTrackingInfo> sendData(
+    public List<OperationResult> sendData(
             Socket socket,
             List<CourierTrackingInfo> courierTrackingInfos,
             int dispatcherId,
             Instant now) {
-        List<CourierTrackingInfo> successfullySentPositions = new ArrayList<>();
+        List<OperationResult> dataInfo = new ArrayList<>();
 
         try {
             socket.setSoTimeout(egtsConfigProperties.getTimeout());
@@ -51,20 +52,28 @@ public class EgtsConnectorImpl implements EgtsConnector {
 
                 PackageData packageData = RequestEgtsFactory.createPositionRequest(courierTrackingInfo,
                         i + 1, egtsConfigProperties.getVendorId()); //TODO вероятно, это не параметр, а просто значение
-                boolean result = positionService.sendPosition(packageData, inputStream, outputStream);
+                Optional<PackageData> optionalPackageData = positionService.sendPosition(packageData, inputStream, outputStream);
 
-                if (result) {
-                    successfullySentPositions.add(courierTrackingInfo);
-                }
+                OperationResult operationResult = OperationResult.builder()
+                        .isSuccessful(optionalPackageData
+                                .map(PackageData::isAckAndIsOk)
+                                .orElse(false))
+                        .initialData(courierTrackingInfo)
+                        .sentData(packageData)
+                        .receivedData(optionalPackageData
+                                .orElse(null))
+                        .build();
 
-                log.debug("RESULT DATA: {}", result);
+                dataInfo.add(operationResult);
+
+                log.debug("RESULT DATA: {}", operationResult);
             }
 
-            return successfullySentPositions;
+            return dataInfo;
 
 
         } catch (IOException e) {
-            return successfullySentPositions;
+            return dataInfo;
         }
     }
 }

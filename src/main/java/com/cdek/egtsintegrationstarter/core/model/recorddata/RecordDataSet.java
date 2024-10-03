@@ -1,7 +1,7 @@
 package com.cdek.egtsintegrationstarter.core.model.recorddata;
 
 import com.cdek.egtsintegrationstarter.core.model.BinaryData;
-import com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.SubRecordData;
+import com.cdek.egtsintegrationstarter.core.model.DecodableBinaryData;
 import com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.response.ResultCodeResponse;
 import com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.response.SubRecordResponse;
 import lombok.AllArgsConstructor;
@@ -33,7 +33,6 @@ public class RecordDataSet implements BinaryData {
         this.recordDataList = new ArrayList<>();
     }
 
-    @Override
     public BinaryData decode(byte[] recDS) {
         var inputStream = new ByteArrayInputStream(recDS);
         var in = new BufferedInputStream(inputStream);
@@ -46,7 +45,7 @@ public class RecordDataSet implements BinaryData {
                         .order(ByteOrder.LITTLE_ENDIAN).getShort();
                 var subrecordBytes = in.readNBytes(subrecordLength);
 
-                SubRecordData data = subrecordType == RecordType.RESULT_CODE ? new ResultCodeResponse() : new SubRecordResponse();
+                DecodableBinaryData data = subrecordType == RecordType.RESULT_CODE ? new ResultCodeResponse() : new SubRecordResponse();
                 data.decode(subrecordBytes);
 
                 var rd = new RecordData(data, subrecordType);

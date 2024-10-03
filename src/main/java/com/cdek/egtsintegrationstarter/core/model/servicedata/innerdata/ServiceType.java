@@ -3,23 +3,23 @@ package com.cdek.egtsintegrationstarter.core.model.servicedata.innerdata;
 import lombok.Getter;
 
 /**
- * Перечисление, представляющее типы сервисов в EGTS-системе.
+ * Перечисление, представляющее типы сервисов в EGTS-системе
  */
 @Getter
 public enum ServiceType {
 
     /**
-     * Сервис аутентификации.
+     * Сервис аутентификации
      */
     EGTS_AUTH_SERVICE(1),
 
     /**
-     * Сервис телематических данных.
+     * Сервис телематических данных
      */
     EGTS_TELEDATA_SERVICE(2);
 
     /**
-     * Идентификатор типа сервиса.
+     * Идентификатор типа сервиса
      */
     private final int id;
 
@@ -28,10 +28,10 @@ public enum ServiceType {
     }
 
     /**
-     * Возвращает тип сервиса по его идентификатору.
+     * Возвращает тип сервиса по его идентификатору
      *
-     * @param id Идентификатор типа сервиса.
-     * @return Тип сервиса, соответствующий указанному идентификатору, или null, если такого типа не существует.
+     * @param id Идентификатор типа сервиса
+     * @return Тип сервиса, соответствующий указанному идентификатору, или null, если такого типа не существует
      */
     public static ServiceType fromId(int id) {
         for (ServiceType value : ServiceType.values()) {

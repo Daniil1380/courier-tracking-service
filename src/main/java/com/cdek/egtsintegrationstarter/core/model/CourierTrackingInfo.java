@@ -11,84 +11,84 @@ import java.time.Instant;
 import java.util.List;
 
 /**
- * Класс, представляющий информацию о трекинге курьера.
+ * Класс, представляющий информацию о трекинге курьера
  */
 @Data
 @Builder
 public class CourierTrackingInfo {
 
     /**
-     * Идентификатор курьера.
+     * Идентификатор курьера
      */
     private int courierId;
 
     /**
-     * Тип транспорта.
+     * Тип транспорта
      */
     private TransportType transportType;
 
     /**
-     * Статус курьера.
+     * Статус курьера
      */
     private CourierStatus courierStatus;
 
     /**
-     * Идентификатор транспорта.
+     * Идентификатор транспорта
      */
     private String transportIdentifier;
 
     /**
-     * Номера заказов.
+     * Номера заказов
      */
     private List<String> orderNumbers;
 
     /**
-     * Номера сумок курьера.
+     * Номера сумок курьера
      */
     private List<String> bagNumbers;
 
     /**
-     * Время навигации.
+     * Время навигации
      */
     private Instant navigationTime;
 
     /**
-     * Широта.
+     * Широта
      */
     private int latitude;
 
     /**
-     * Долгота.
+     * Долгота
      */
     private int longitude;
 
     /**
-     * Сторона света от экватора.
+     * Сторона света от экватора
      */
     private HemisphereEquatorType equatorSide;
 
     /**
-     * Тип стороны света относительно Гринвича.
+     * Тип стороны света относительно Гринвича
      */
     private HemisphereGreenwichType greenwichType;
 
     /**
-     * Флаг, указывающий, движется ли курьер.
+     * Флаг, указывающий, движется ли курьер
      */
     private boolean isMoving;
 
     /**
-     * Скорость курьера.
+     * Скорость курьера
      */
     private double speed;
 
     /**
-     * Направление движения курьера.
+     * Направление движения курьера
      */
     private int direction;
 
     /**
-     * Пробег Т\С.
+     * Пробег Т\С
      */
     private int odometer;
 }

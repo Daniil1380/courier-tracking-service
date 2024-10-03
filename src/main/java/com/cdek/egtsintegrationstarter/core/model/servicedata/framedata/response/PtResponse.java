@@ -1,6 +1,5 @@
 package com.cdek.egtsintegrationstarter.core.model.servicedata.framedata.response;
 
-import com.cdek.egtsintegrationstarter.core.model.BinaryData;
 import com.cdek.egtsintegrationstarter.core.model.servicedata.framedata.ServiceFrameData;
 import com.cdek.egtsintegrationstarter.core.model.servicedata.framedata.request.ServiceDataSet;
 import lombok.AllArgsConstructor;
@@ -16,7 +15,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 /**
- * Класс, представляющий ответ на пакет данных (PT-ответ) в EGTS-системе.
+ * Класс, представляющий ответ на пакет данных (PT-ответ) в EGTS-системе
  */
 @Data
 @NoArgsConstructor
@@ -25,17 +24,17 @@ import java.nio.ByteOrder;
 public class PtResponse implements ServiceFrameData {
 
     /**
-     * Идентификатор пакета ответа.
+     * Идентификатор пакета ответа
      */
     private int responsePacketId;
 
     /**
-     * Результат обработки.
+     * Результат обработки
      */
     private int processingResult;
 
     /**
-     * Набор данных сервиса.
+     * Набор данных сервиса
      */
     private ServiceDataSet serviceDataSet;
 
@@ -44,8 +43,7 @@ public class PtResponse implements ServiceFrameData {
      */
     private static final int SIZE_OF_DATA = 3;
 
-    @Override
-    public BinaryData decode(byte[] content) {
+    public void decode(byte[] content) {
         var inputStream = new ByteArrayInputStream(content);
         var in = new BufferedInputStream(inputStream);
         try {
@@ -56,7 +54,6 @@ public class PtResponse implements ServiceFrameData {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return this;
     }
 
 
@@ -80,9 +77,9 @@ public class PtResponse implements ServiceFrameData {
     }
 
     /**
-     * Проверяет, успешен ли результат обработки.
+     * Проверяет, успешен ли результат обработки
      *
-     * @return {@code true}, если результат обработки успешен (processingResult == 0), иначе {@code false}.
+     * @return {@code true}, если результат обработки успешен (processingResult == 0), иначе {@code false}
      */
     public boolean isAckOk() {
         return processingResult == 0;

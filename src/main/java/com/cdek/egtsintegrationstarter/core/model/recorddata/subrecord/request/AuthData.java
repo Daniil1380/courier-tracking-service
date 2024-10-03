@@ -1,7 +1,6 @@
 package com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.request;
 
 import com.cdek.egtsintegrationstarter.core.model.BinaryData;
-import com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.SubRecordData;
 import lombok.Data;
 
 import java.io.ByteArrayOutputStream;
@@ -10,39 +9,34 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 /**
- * Класс, представляющий данные аутентификации.
+ * Класс, представляющий данные аутентификации
  */
 @Data
-public class AuthData implements SubRecordData {
+public class AuthData implements BinaryData {
 
     /**
-     * Тип диспетчера.
+     * Тип диспетчера
      */
     private byte dispatcherType;
 
     /**
-     * Идентификатор диспетчера.
+     * Идентификатор диспетчера
      */
     private int dispatcherId;
 
     /**
-     * Байт, равный нулю.
+     * Байт, равный нулю
      */
     private final static byte ZERO_BYTE = 0;
 
     /**
-     * Размер данных в байтах.
+     * Размер данных в байтах
      */
     private final static byte SIZE_OF_DATA = 5;
 
     public AuthData(int dispatcherId) {
         this.dispatcherType = ZERO_BYTE;
         this.dispatcherId = dispatcherId;
-    }
-
-    @Override
-    public BinaryData decode(byte[] content) {
-        return null;
     }
 
     @Override

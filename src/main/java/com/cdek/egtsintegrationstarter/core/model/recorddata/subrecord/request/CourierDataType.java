@@ -3,28 +3,28 @@ package com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.request;
 import lombok.Getter;
 
 /**
- * Перечисление, представляющее типы данных курьера.
+ * Перечисление, представляющее типы данных курьера
  */
 @Getter
 public enum CourierDataType {
 
     /**
-     * Идентификатор курьера.
+     * Идентификатор курьера
      */
     COURIER_IDENTIFIER((byte) 0xC1),
 
     /**
-     * Текущий статус курьера.
+     * Текущий статус курьера
      */
     CURRENT_STATUS((byte) 0xC5),
 
     /**
-     * Тип транспорта.
+     * Тип транспорта
      */
     TRANSPORT((byte) 0xC2);
 
     /**
-     * Идентификатор типа данных курьера.
+     * Идентификатор типа данных курьера
      */
     private final byte id;
 

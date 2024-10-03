@@ -1,7 +1,6 @@
 package com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.response;
 
-import com.cdek.egtsintegrationstarter.core.model.BinaryData;
-import com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.SubRecordData;
+import com.cdek.egtsintegrationstarter.core.model.DecodableBinaryData;
 import lombok.Data;
 
 import java.io.ByteArrayInputStream;
@@ -11,18 +10,18 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 /**
- * Класс, представляющий ответ на подзапись сервиса.
+ * Класс, представляющий ответ на подзапись сервиса
  */
 @Data
-public class SubRecordResponse implements SubRecordData {
+public class SubRecordResponse implements DecodableBinaryData {
 
     /**
-     * Номер подтверждённой записи.
+     * Номер подтверждённой записи
      */
     private short confirmedRecordNumber;
 
     /**
-     * Статус записи.
+     * Статус записи
      */
     private byte recordStatus;
 
@@ -39,17 +38,15 @@ public class SubRecordResponse implements SubRecordData {
         this.recordStatus = recordStatus;
     }
 
-    @Override
-    public BinaryData decode(byte[] content) {
+
+    public void decode(byte[] content) {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(content);
         try {
             confirmedRecordNumber = ByteBuffer.wrap(inputStream.readNBytes(2)).order(ByteOrder.LITTLE_ENDIAN).getShort();
             recordStatus = inputStream.readNBytes(1)[0];
         } catch (IOException exception) {
             System.out.println("SrResponse decode error " + exception.getMessage());
-            return null;
         }
-        return this;
     }
 
     @Override

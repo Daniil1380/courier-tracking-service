@@ -1,7 +1,7 @@
 package com.cdek.egtsintegrationstarter.exception;
 
 /**
- * Исключение, выбрасываемое при получении некорректного ответа в EGTS.
+ * Исключение, выбрасываемое при получении некорректного ответа в EGTS
  */
 public class EgtsBadAnswerException extends Exception {
 

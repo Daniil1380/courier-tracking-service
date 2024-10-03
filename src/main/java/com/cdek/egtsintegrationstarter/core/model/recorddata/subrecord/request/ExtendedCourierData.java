@@ -1,7 +1,6 @@
 package com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.request;
 
 import com.cdek.egtsintegrationstarter.core.model.BinaryData;
-import com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.SubRecordData;
 import lombok.Data;
 
 import java.io.ByteArrayOutputStream;
@@ -11,33 +10,33 @@ import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Класс, представляющий расширенные данные курьера.
+ * Класс, представляющий расширенные данные курьера
  */
 @Data
-public class ExtendedCourierData implements SubRecordData {
+public class ExtendedCourierData implements BinaryData {
 
     /**
-     * Идентификатор вендора.
+     * Идентификатор вендора
      */
     private int vendorIdentifier;
 
     /**
-     * Тип данных.
+     * Тип данных
      */
     private int dataType;
 
     /**
-     * Строковое значение данных.
+     * Строковое значение данных
      */
     private String valueString;
 
     /**
-     * Байт, равный нулю.
+     * Байт, равный нулю
      */
     private final static byte ZERO_BYTE = 0;
 
     /**
-     * Размер данных в байтах (без учета строкового значения).
+     * Размер данных в байтах (без учета строкового значения)
      */
     private final static byte SIZE_OF_DATA = 4;
 
@@ -46,11 +45,6 @@ public class ExtendedCourierData implements SubRecordData {
         this.vendorIdentifier = vendorIdentifier;
         this.dataType = ZERO_BYTE;
         this.valueString = valueString;
-    }
-
-    @Override
-    public BinaryData decode(byte[] content) {
-        return null;
     }
 
     @Override

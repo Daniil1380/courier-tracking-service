@@ -1,7 +1,6 @@
 package com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.request;
 
 import com.cdek.egtsintegrationstarter.core.model.BinaryData;
-import com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.SubRecordData;
 import lombok.Data;
 
 import java.io.ByteArrayOutputStream;
@@ -16,130 +15,130 @@ import static com.cdek.egtsintegrationstarter.util.BooleanUtil.getStringFromBool
  * Класс, представляющий данные о позиции курьера
  */
 @Data
-public class PositionData implements SubRecordData {
+public class PositionData implements BinaryData {
 
     /**
-     * Время навигации.
+     * Время навигации
      */
     private Instant navigationTime;
 
     /**
-     * Широта.
+     * Широта
      */
     private int latitude;
 
     /**
-     * Долгота.
+     * Долгота
      */
     private int longitude;
 
     /**
-     * Флаг, указывающий, будет ли учитываться высота как 3ая координата.
+     * Флаг, указывающий, будет ли учитываться высота как 3ая координата
      */
     private boolean altitudeExists;
 
     /**
-     * Тип полушария по экватору.
+     * Тип полушария по экватору
      */
     private HemisphereEquatorType hemisphereEquatorType;
 
     /**
-     * Тип полушария по Гринвичу.
+     * Тип полушария по Гринвичу
      */
     private HemisphereGreenwichType hemisphereGreenwichType;
 
     /**
-     * Флаг, указывающий, движется ли курьер.
+     * Флаг, указывающий, движется ли курьер
      */
     private boolean isMoving;
 
     /**
-     * Флаг, указывающий, получены ли данные из памяти.
+     * Флаг, указывающий, получены ли данные из памяти
      */
     private boolean fromMemory;
 
     /**
-     * Флаг, указывающий, используются ли 3D-координаты.
+     * Флаг, указывающий, используются ли 3D-координаты
      */
     private boolean is3dFix;
 
     /**
-     * Флаг, указывающий, используются ли координаты государственной системы.
+     * Флаг, указывающий, используются ли координаты государственной системы
      */
     private boolean isGovernmentCoordinate;
 
     /**
-     * Флаг, указывающий, являются ли данные валидными.
+     * Флаг, указывающий, являются ли данные валидными
      */
     private boolean isValidData;
 
     /**
-     * Скорость.
+     * Скорость
      */
     private double speed;
 
     /**
-     * Направление.
+     * Направление
      */
     private int direction;
 
     /**
-     * Пробег.
+     * Пробег
      */
     private int odometer;
 
     /**
-     * Цифровые входы.
+     * Цифровые входы
      */
     private byte digitalInputs;
 
     /**
-     * Источник данных.
+     * Источник данных
      */
     private byte source;
 
     /**
-     * Временная метка начала отсчёта (1 января 2010 года).
+     * Временная метка начала отсчёта (1 января 2010 года)
      */
     private final static Long TIMESTAMP_IN_2010 = 1262304000L;
 
     /**
-     * Множитель скорости.
+     * Множитель скорости
      */
     private final static int SPEED_MULTIPLIER = 10;
 
     /**
-     * Байт, равный нулю.
+     * Байт, равный нулю
      */
     private final static byte ZERO_BYTE = 0;
 
     /**
-     * Максимальное значение байта.
+     * Максимальное значение байта
      */
     private final static int MAX_BYTE = 0xFF;
 
     /**
-     * Максимальное значение широты.
+     * Максимальное значение широты
      */
     private final static int MAX_LATITUDE = 90;
 
     /**
-     * Максимальное значение долготы.
+     * Максимальное значение долготы
      */
     private final static int MAX_LONGITUDE = 180;
 
     /**
-     * Максимальное значение беззнакового целого числа.
+     * Максимальное значение беззнакового целого числа
      */
     private final static int MAX_VALUE_UNSIGNED_INT = 0xFFFFFFFF;
 
     /**
-     * Высший бит в байте.
+     * Высший бит в байте
      */
     private final static int HIGH_BIT_IN_BYTE = 0x8000;
 
     /**
-     * Размер данных в байтах.
+     * Размер данных в байтах
      */
     private final static int SIZE_OF_DATA = 21;
 
@@ -171,11 +170,6 @@ public class PositionData implements SubRecordData {
     }
 
     @Override
-    public BinaryData decode(byte[] content) {
-        return null;
-    }
-
-    @Override
     public byte[] encode() {
         try (ByteArrayOutputStream bytesOut = new ByteArrayOutputStream()) {
             int latitudeNormalized = normalizeCoordinate(latitude, MAX_LATITUDE);
@@ -202,11 +196,11 @@ public class PositionData implements SubRecordData {
     }
 
     /**
-     * Нормализует координату.
+     * Нормализует координату
      *
-     * @param coordinate Значение координаты.
-     * @param maxValue   Максимальное значение координаты.
-     * @return Нормализованное значение координаты.
+     * @param coordinate Значение координаты
+     * @param maxValue   Максимальное значение координаты
+     * @return Нормализованное значение координаты
      */
     private int normalizeCoordinate(int coordinate, int maxValue) {
         int unsignedMultiplier = Integer.divideUnsigned(MAX_VALUE_UNSIGNED_INT, maxValue);
@@ -214,9 +208,9 @@ public class PositionData implements SubRecordData {
     }
 
     /**
-     * Вычисляет флаги для данных о позиции.
+     * Вычисляет флаги для данных о позиции
      *
-     * @return Значение флагов.
+     * @return Значение флагов
      */
     private int calculateFlags() {
         var flagBits =
@@ -233,9 +227,9 @@ public class PositionData implements SubRecordData {
     }
 
     /**
-     * Вычисляет скорость курьера в формате EGTS.
+     * Вычисляет скорость курьера в формате EGTS
      *
-     * @return Значение скорости.
+     * @return Значение скорости
      */
     private short calculateSpeed() {
         int speedInt = (int) (speed * SPEED_MULTIPLIER);
@@ -250,7 +244,7 @@ public class PositionData implements SubRecordData {
     /**
      * Вычисляет время с 2010 для EGTS формата
      *
-     * @return Значение времени.
+     * @return Значение времени
      */
     private int calculateTime() {
         return (int) (navigationTime.getEpochSecond() - TIMESTAMP_IN_2010);

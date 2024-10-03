@@ -3,23 +3,23 @@ package com.cdek.egtsintegrationstarter.core.model.packagedata;
 import lombok.Getter;
 
 /**
- * Перечисление, представляющее типы пакетов в EGTS-системе.
+ * Перечисление, представляющее типы пакетов в EGTS-системе
  */
 @Getter
 public enum PackageType {
 
     /**
-     * Пакет ответа.
+     * Пакет ответа
      */
     EGTS_PT_RESPONSE(0),
 
     /**
-     * Пакет данных.
+     * Пакет данных
      */
     EGTS_PT_APPDATA(1);
 
     /**
-     * Идентификатор типа пакета.
+     * Идентификатор типа пакета
      */
     private final int id;
 
@@ -28,10 +28,10 @@ public enum PackageType {
     }
 
     /**
-     * Возвращает тип пакета по его идентификатору.
+     * Возвращает тип пакета по его идентификатору
      *
-     * @param id Идентификатор типа пакета.
-     * @return Тип пакета, соответствующий указанному идентификатору, или null, если такого типа не существует.
+     * @param id Идентификатор типа пакета
+     * @return Тип пакета, соответствующий указанному идентификатору, или null, если такого типа не существует
      */
     public static PackageType fromId(int id) {
         for (PackageType value : PackageType.values()) {

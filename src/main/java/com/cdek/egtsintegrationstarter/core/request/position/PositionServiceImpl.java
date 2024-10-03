@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -19,20 +20,20 @@ public class PositionServiceImpl implements PositionService {
     private final PackageSender packageSender;
     private final EgtsConfigProperties egtsConfigProperties;
 
-    public boolean sendPosition(PackageData packageData, InputStream inputStream, OutputStream outputStream) {
+    public Optional<PackageData> sendPosition(PackageData packageData, InputStream inputStream, OutputStream outputStream) {
         for (int i = 0; i < egtsConfigProperties.getMaxAttempts(); i++) {
             packageSender.sendPackage(outputStream, packageData);
 
             try {
                 PackageData responsePosition = packageReceiver.receivePackage(inputStream);
 
-                return responsePosition != null && responsePosition.isAckAndIsOk();
+                return Optional.ofNullable(responsePosition);
             } catch (EgtsBadAnswerException e) {
                 log.error("ERROR WHILE WAITING ACK FOR {}", packageData);
             }
         }
 
-        return false;
+        return Optional.empty();
     }
 
 }

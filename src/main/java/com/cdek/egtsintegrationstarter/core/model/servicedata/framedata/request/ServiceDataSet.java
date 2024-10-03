@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс, представляющий набор сервисов.
+ * Класс, представляющий набор сервисов
  */
 @Data
 @AllArgsConstructor
@@ -28,7 +28,7 @@ import java.util.List;
 public class ServiceDataSet implements ServiceFrameData {
 
     /**
-     * Список сервисов.
+     * Список сервисов
      */
     private List<ServiceDataRecord> serviceDataRecords;
     /**
@@ -37,9 +37,9 @@ public class ServiceDataSet implements ServiceFrameData {
     private final static Long TIMESTAMP_IN_2010 = 1262304000L;
 
     @Override
-    public BinaryData decode(byte[] serviceDS) {
+    public void decode(byte[] content) {
         serviceDataRecords = new ArrayList<>();
-        var inputStream = new ByteArrayInputStream(serviceDS);
+        var inputStream = new ByteArrayInputStream(content);
         var in = new BufferedInputStream(inputStream);
         while (true) {
             try {
@@ -102,7 +102,6 @@ public class ServiceDataSet implements ServiceFrameData {
                 throw new RuntimeException(e);
             }
         }
-        return this;
     }
 
     @Override

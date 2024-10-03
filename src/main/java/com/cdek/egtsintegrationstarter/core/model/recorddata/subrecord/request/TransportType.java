@@ -3,33 +3,33 @@ package com.cdek.egtsintegrationstarter.core.model.recorddata.subrecord.request;
 import lombok.Getter;
 
 /**
- * Перечисление, представляющее типы транспорта.
+ * Перечисление, представляющее типы транспорта
  */
 @Getter
 public enum TransportType {
 
     /**
-     * Пешком.
+     * Пешком
      */
     ON_FOOT(0),
 
     /**
-     * Личное мобильное средство (например, самокат, гироскутер).
+     * Личное мобильное средство (например, самокат, гироскутер)
      */
     PERSONAL_MOBILITY_VEHICLE(1),
 
     /**
-     * Велосипед.
+     * Велосипед
      */
     BIKE(2),
 
     /**
-     * Автомобиль.
+     * Автомобиль
      */
     CAR(3);
 
     /**
-     * Идентификатор типа транспорта.
+     * Идентификатор типа транспорта
      */
     private final int id;
 

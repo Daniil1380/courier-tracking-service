@@ -41,11 +41,11 @@ public class RequestEgtsFactory {
     private final static String FORMAT_STRING = "kisartid=%d;vplate=%s;bagplates=%s;orders=%s";
 
     /**
-     * Создает пакет данных для аутентификационного запроса.
+     * Создает пакет данных для аутентификационного запроса
      *
-     * @param dispatcherId Идентификатор диспетчера.
-     * @param now          Текущее время.
-     * @return Пакет данных для аутентификационного запроса.
+     * @param dispatcherId Идентификатор диспетчера
+     * @param now          Текущее время
+     * @return Пакет данных для аутентификационного запроса
      */
     public static PackageData createAuthRequest(int dispatcherId, Instant now) {
         AuthData authData = new AuthData(dispatcherId);
@@ -59,12 +59,12 @@ public class RequestEgtsFactory {
     }
 
     /**
-     * Создает пакет данных для подтверждения отправки запроса.
+     * Создает пакет данных для подтверждения отправки запроса
      *
-     * @param submittedPackageId   Идентификатор отправленного пакета.
-     * @param submittedSubRecordId Идентификатор отправленной записи.
-     * @param now                  Текущее время.
-     * @return Пакет данных для подтверждения отправки запроса.
+     * @param submittedPackageId   Идентификатор отправленного пакета
+     * @param submittedSubRecordId Идентификатор отправленной записи
+     * @param now                  Текущее время
+     * @return Пакет данных для подтверждения отправки запроса
      */
     public static PackageData createSubmitRequest(int submittedPackageId, int submittedSubRecordId, Instant now) {
         SubRecordResponse subRecordResponse = new SubRecordResponse((short) submittedSubRecordId, ZERO_CODE);
@@ -77,12 +77,12 @@ public class RequestEgtsFactory {
     }
 
     /**
-     * Создает пакет данных для отправки позиции курьера и доп. данных.
+     * Создает пакет данных для отправки позиции курьера и доп. данных
      *
-     * @param courierTrackingInfo Информация о трекинге курьера.
-     * @param packageId           Идентификатор пакета.
-     * @param vendorIdentifier    Идентификатор вендора.
-     * @return Пакет данных для запроса позиции курьера.
+     * @param courierTrackingInfo Информация о трекинге курьера
+     * @param packageId           Идентификатор пакета
+     * @param vendorIdentifier    Идентификатор вендора
+     * @return Пакет данных для запроса позиции курьера
      */
     public static PackageData createPositionRequest(CourierTrackingInfo courierTrackingInfo, int packageId, int vendorIdentifier) {
         PositionData positionData = new PositionData(
@@ -128,13 +128,13 @@ public class RequestEgtsFactory {
     }
 
     /**
-     * Форматирует данные о курьере в строку.
+     * Форматирует данные о курьере в строку
      *
-     * @param courierIdentifier   Идентификатор курьера.
-     * @param transportIdentifier Идентификатор транспорта.
-     * @param orderNumbers        Номера заказов.
-     * @param bagNumbers          Номера мешков.
-     * @return Отформатированная строка данных.
+     * @param courierIdentifier   Идентификатор курьера
+     * @param transportIdentifier Идентификатор транспорта
+     * @param orderNumbers        Номера заказов
+     * @param bagNumbers          Номера мешков
+     * @return Отформатированная строка данных
      */
     private static String formatDataToString(int courierIdentifier,
                                              String transportIdentifier,
